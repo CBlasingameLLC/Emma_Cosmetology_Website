@@ -48,7 +48,7 @@ const jsonLd = {
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>{title}</title>
   <meta name="description" content={description} />
 
@@ -57,7 +57,7 @@ const jsonLd = {
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="Blasingame" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <link rel="icon" href="/assets/icon-192.png" />
 
@@ -70,11 +70,16 @@ const jsonLd = {
 
   <script is:inline>
     (function () {
+      var dark = false;
       try {
         var stored = localStorage.getItem('bb-theme');
-        if (stored === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        else if (stored === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        if (stored === 'dark') dark = true;
+        else if (stored === 'light') dark = false;
+        else dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       } catch (e) {}
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', dark ? '#1a1113' : '#fdf7f9');
     })();
   </script>
 </head>

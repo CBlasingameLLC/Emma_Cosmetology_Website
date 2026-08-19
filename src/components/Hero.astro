@@ -222,6 +222,7 @@ import { flatRate } from '../data/services';
   .hero-photo {
     position: relative;
     width: 100%;
+    height: auto;
     aspect-ratio: 4 / 5;
     object-fit: cover;
     object-position: 50% 22%;
@@ -250,5 +251,24 @@ import { flatRate } from '../data/services';
     font-family: 'Cormorant Garamond', serif;
     font-size: 20px;
     margin-top: 3px;
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 24px 0 clamp(40px, 8vw, 64px);
+    }
+    .hero-photo-wrap {
+      width: 100%;
+      max-width: 340px;
+      margin-inline: auto;
+    }
+    .hero-photo {
+      aspect-ratio: 3 / 4;
+    }
+    .hero-chip {
+      left: 10px;
+      bottom: 14px;
+      padding: 10px 15px;
+    }
   }
 </style>

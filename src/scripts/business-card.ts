@@ -56,6 +56,17 @@ async function shareCard(labelEl: HTMLElement) {
   }, 2200);
 }
 
+function initHomeScreenNote() {
+  const note = document.getElementById('home-screen-note');
+  if (!note) return;
+
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const alreadyInstalled =
+    window.matchMedia('(display-mode: standalone)').matches || (navigator as any).standalone === true;
+
+  note.hidden = !isMobile || alreadyInstalled;
+}
+
 function initInstall() {
   const installBtn = document.getElementById('install-app-btn');
   if (!installBtn) return;
@@ -89,6 +100,7 @@ function init() {
     shareBtn.addEventListener('click', () => shareCard(shareLabel));
   }
   initInstall();
+  initHomeScreenNote();
 }
 
 if (document.readyState === 'loading') {

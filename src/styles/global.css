@@ -123,10 +123,10 @@ a:hover { color: var(--pink); }
 }
 
 .section {
-  padding: clamp(76px, 9vw, 132px) 0;
+  padding: clamp(44px, 9vw, 132px) 0;
 }
 .section-tight {
-  padding: clamp(52px, 7vw, 96px) 0;
+  padding: clamp(34px, 7vw, 96px) 0;
 }
 .section-band {
   background: var(--bg-2);
@@ -149,10 +149,22 @@ h1, h2, h3 {
 @keyframes pop { from { opacity: 0; transform: scale(.94) translateY(10px); } to { opacity: 1; transform: none; } }
 @keyframes sheen { from { transform: translateX(-120%) skewX(-18deg); } to { transform: translateX(320%) skewX(-18deg); } }
 
+/*
+ * Scroll reveals: visible by default (safe with no JS). Once chrome.ts's
+ * IntersectionObserver confirms it's running, it adds `js-reveal-ready` to
+ * <html> and elements hide until scrolled into view, where `revealed` plays
+ * the entrance once. Skipped entirely under reduced motion — see chrome.ts.
+ */
 .reveal {
-  animation: rise .9s cubic-bezier(.2, .7, .2, 1) both;
-  animation-timeline: view();
-  animation-range: entry 4% cover 26%;
+  opacity: 1;
+  transform: none;
+}
+.js-reveal-ready .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+}
+.js-reveal-ready .reveal.revealed {
+  animation: rise .8s cubic-bezier(.2, .7, .2, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {

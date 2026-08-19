@@ -4,16 +4,18 @@
       <span class="brand-name">Blasingame</span>
       <span class="brand-sub">Beauty</span>
     </a>
-    <nav class="nav">
+    <nav class="nav-scroll" id="nav-scroll">
       <a data-navlink="services" href="#services" class="nav-link">Services</a>
       <a data-navlink="quiz" href="#quiz" class="nav-link">Hair Quiz</a>
       <a data-navlink="work" href="#work" class="nav-link">Work</a>
       <a data-navlink="about" href="#about" class="nav-link">About</a>
+    </nav>
+    <div class="header-actions">
       <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch theme">
         <span id="theme-knob" class="theme-knob"></span>
       </button>
       <a href="#book" class="book-pill">Book</a>
-    </nav>
+    </div>
   </div>
 </header>
 
@@ -30,6 +32,7 @@
     -webkit-backdrop-filter: blur(14px) saturate(1.4);
     background: color-mix(in oklab, var(--bg) 82%, transparent);
     border-bottom: 1px solid var(--line);
+    padding-top: env(safe-area-inset-top);
   }
   .header-inner {
     display: flex;
@@ -43,6 +46,7 @@
     align-items: baseline;
     gap: 9px;
     color: var(--ink);
+    flex: none;
   }
   .brand-name {
     font-family: 'Cormorant Garamond', serif;
@@ -56,19 +60,26 @@
     text-transform: uppercase;
     color: var(--pink-2);
   }
-  .nav {
+  .nav-scroll {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: clamp(10px, 2vw, 30px);
-    row-gap: 10px;
+    gap: clamp(14px, 2vw, 30px);
   }
   .nav-link {
     font-size: 13px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .nav-link.nav-link-active {
+    color: var(--pink);
+  }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: none;
   }
   .theme-toggle {
     position: relative;
@@ -108,5 +119,43 @@
     transform: translateY(-2px);
     box-shadow: 0 14px 34px -10px var(--glow);
     color: var(--onpink);
+  }
+
+  /* Mobile: the primary row shrinks to brand + toggle + book. Nav links
+     drop to a second, visually quieter row that scrolls horizontally
+     instead of wrapping into a cluttered multi-line mess. The mask fade
+     and chrome.ts's one-time scroll nudge both signal it's scrollable. */
+  @media (max-width: 640px) {
+    .header-inner {
+      flex-wrap: wrap;
+      padding: 10px 0 0;
+    }
+    .header-actions {
+      order: 2;
+    }
+    .nav-scroll {
+      order: 3;
+      flex-basis: 100%;
+      gap: 34px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 9px 3px 10px;
+      margin-top: 2px;
+      -webkit-mask-image: linear-gradient(to right, transparent, black 18px, black calc(100% - 26px), transparent);
+      mask-image: linear-gradient(to right, transparent, black 18px, black calc(100% - 26px), transparent);
+    }
+    .nav-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .nav-link {
+      flex: none;
+      font-size: 11.5px;
+      letter-spacing: 0.1em;
+      padding-inline: 12px;
+      color: var(--ink-3);
+      padding-block: 2px;
+    }
   }
 </style>

@@ -13,7 +13,7 @@ const spotlights = [
 {showModelCall && (
   <section id="models" data-nav="models" class="section section-band">
     <div class="container models-grid">
-      <div>
+      <div class="reveal">
         <div class="pill pill-outline">
           <span class="dot"></span>
           Models wanted
@@ -32,7 +32,7 @@ const spotlights = [
         </div>
         <a href="#book" class="btn-primary" data-analytics="model_cta_click">Volunteer as a model</a>
       </div>
-      <div class="spotlight-grid">
+      <div class="spotlight-grid reveal">
         {spotlights.map((s) => (
           <div data-spot class="spotlight-card">
             <div class="spotlight-num">{s.n}</div>

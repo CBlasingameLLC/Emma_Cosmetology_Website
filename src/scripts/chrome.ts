@@ -53,7 +53,7 @@ function initNavObserver() {
         if (!entry.isIntersecting) return;
         const id = entry.target.getAttribute('data-nav');
         links.forEach((a) => {
-          a.style.color = a.getAttribute('data-navlink') === id ? 'var(--pink)' : 'var(--ink-2)';
+          a.classList.toggle('nav-link-active', a.getAttribute('data-navlink') === id);
         });
       });
     },
@@ -94,11 +94,45 @@ function initPointerEffects() {
   );
 }
 
+function initReveal() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const els = document.querySelectorAll<HTMLElement>('.reveal');
+  if (!els.length) return;
+  document.documentElement.classList.add('js-reveal-ready');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+  );
+  els.forEach((el) => observer.observe(el));
+}
+
+function initNavScrollHint() {
+  const strip = document.getElementById('nav-scroll');
+  if (!strip) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  requestAnimationFrame(() => {
+    if (strip.scrollWidth <= strip.clientWidth + 4) return;
+    setTimeout(() => {
+      strip.scrollTo({ left: 36, behavior: 'smooth' });
+      setTimeout(() => strip.scrollTo({ left: 0, behavior: 'smooth' }), 550);
+    }, 700);
+  });
+}
+
 function init() {
   initTheme();
   initScrollProgress();
   initNavObserver();
   initPointerEffects();
+  initReveal();
+  initNavScrollHint();
 }
 
 if (document.readyState === 'loading') {

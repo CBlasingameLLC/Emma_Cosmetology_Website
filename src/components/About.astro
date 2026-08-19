@@ -5,7 +5,7 @@ import emmaPortrait from '../assets/emma-portrait.jpg';
 
 <section id="about" data-nav="about" class="section">
   <div class="container about-grid">
-    <div data-tilt class="about-photo-wrap">
+    <div data-tilt class="about-photo-wrap reveal">
       <div aria-hidden="true" class="about-glow"></div>
       <Image
         src={emmaPortrait}
@@ -22,7 +22,7 @@ import emmaPortrait from '../assets/emma-portrait.jpg';
         <div class="chip-year">2026</div>
       </div>
     </div>
-    <div>
+    <div class="reveal">
       <div class="eyebrow">Meet your stylist</div>
       <h2 class="section-title about-title">Hi, I'm Emma</h2>
       <div class="about-copy">
@@ -84,6 +84,7 @@ import emmaPortrait from '../assets/emma-portrait.jpg';
   .about-photo {
     position: relative;
     width: 100%;
+    height: auto;
     aspect-ratio: 4 / 5;
     object-fit: cover;
     object-position: 50% 30%;
@@ -158,5 +159,24 @@ import emmaPortrait from '../assets/emma-portrait.jpg';
     line-height: 1.75;
     max-width: 52ch;
     text-wrap: pretty;
+  }
+
+  @media (max-width: 640px) {
+    .about-photo-wrap {
+      width: 100%;
+      max-width: 340px;
+      margin-inline: auto;
+    }
+    .about-photo {
+      aspect-ratio: 3 / 4;
+    }
+    .about-chip {
+      right: 10px;
+      top: 14px;
+      padding: 10px 14px;
+    }
+    .pull-quote {
+      padding: 20px 22px;
+    }
   }
 </style>
