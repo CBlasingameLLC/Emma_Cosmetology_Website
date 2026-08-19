@@ -16,6 +16,6 @@
   "shortcuts": [
     { "name": "Book an appointment", "short_name": "Book", "url": "/#book" },
     { "name": "Take the hair quiz", "short_name": "Hair quiz", "url": "/#quiz" },
-    { "name": "Leave a tip", "short_name": "Tip", "url": "/#tip" }
+    { "name": "Support Emma", "short_name": "Support", "url": "/#support" }
   ]
 }

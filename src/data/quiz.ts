@@ -1,5 +1,3 @@
-import { flatRate } from './services';
-
 export type QuestionKey = 'goal' | 'history' | 'texture' | 'upkeep' | 'timing';
 
 export type QuizOption = { label: string; sub: string };
@@ -165,7 +163,7 @@ export function recommend(answers: string[]): QuizResult {
   if (tex) notes.push(`${tex} hair — I'll cut and finish for that texture, not against it.`);
   if (hist && goal === 'Color') notes.push(`Hair history: ${hist.toLowerCase()}. Bring anything you know about past color.`);
   notes.push('Bring 2–3 inspiration photos — even ones you dislike help me understand your taste.');
-  notes.push(`Every service is ${flatRate} flat at the academy, no matter how long it takes.`);
+  notes.push('Pricing is set by the academy, not by me — I\'ll confirm your exact total before we start.');
 
   return { recommendation: r, notes };
 }

@@ -11,6 +11,6 @@ export const contact = {
   instagramHandle: '@blasingame_beauty',
   tiktok: 'https://www.tiktok.com/@blasingame_beauty?_r=1&_t=ZT-98xesJyqrGQ',
   tiktokHandle: '@blasingame_beauty',
-  gradLabel: 'March 2027',
-  gradTarget: '2027-03-01T09:00:00',
+  gradLabel: 'March 5, 2027',
+  gradTarget: '2027-03-05T09:00:00',
 };

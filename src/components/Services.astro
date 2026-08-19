@@ -1,5 +1,5 @@
 ---
-import { services, flatRate } from '../data/services';
+import { services } from '../data/services';
 ---
 
 <section id="services" data-nav="services" class="section">
@@ -10,8 +10,8 @@ import { services, flatRate } from '../data/services';
         <h2 class="section-title">Services &amp; rates</h2>
       </div>
       <p class="head-note">
-        Every service is <strong>{flatRate} flat</strong> while I'm training at the academy — the
-        rate is set by the school, not by service.
+        Prices are set by the academy, not by me — shown per service below. I'm still building
+        speed as a student, so times run a little longer than a licensed stylist.
       </p>
     </div>
     <div class="service-grid">
@@ -22,7 +22,7 @@ import { services, flatRate } from '../data/services';
           <p class="service-desc">{service.description}</p>
           <div class="service-foot">
             <span>{service.duration}</span>
-            <span class="service-price">{flatRate}</span>
+            <span class="service-price">{service.price}</span>
           </div>
         </article>
       ))}

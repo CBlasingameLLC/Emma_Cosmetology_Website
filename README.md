@@ -32,16 +32,18 @@ npm run preview   # serve the production build locally
 No markup editing needed for day-to-day changes — everything content-shaped lives in
 `src/data/*.ts`:
 
-- **`services.ts`** — the six service cards and the flat rate.
+- **`services.ts`** — the service cards, each with its own real academy price and duration.
+  `startingPrice` drives the "Haircuts start at" hero stat.
 - **`quiz.ts`** — the five hair-quiz questions/options and the recommendation rules. The rules
   are deliberately honest (e.g. box dye always gets a consultation, never a promised one-visit
   fix) — keep that intent if you edit the copy.
-- **`payments.ts`** — Venmo/Cash App/Zelle tip handles. **The Venmo and Cash App handles are
-  placeholders — confirm both with Emma before launch.**
+- **`payments.ts`** — Venmo/Cash App/Zelle handles shown in the low-key Support section.
+  **The Venmo and Cash App handles are placeholders — confirm both with Emma before launch.**
 - **`reviews.ts`** — approved reviews shown on the site. Leave empty until real reviews are
   approved; the empty state is intentional (see design handoff).
-- **`contact.ts`** — phone numbers, academy address, social links, graduation date.
-- **`config.ts`** — feature flags (e.g. `showModelCall`).
+- **`contact.ts`** — phone numbers, academy address, social links, and `gradLabel`/`gradTarget`
+  (the graduation date — not a licensing date, since Emma won't know that until after she
+  graduates). The live countdown reads `gradTarget` directly, so only edit it in one place.
 - **`portfolio.ts`** — before/after image pairs; empty renders the placeholder slider.
 
 ## Open items before launch
@@ -51,6 +53,12 @@ detail:
 
 - Confirm real Venmo/Cash App handles.
 - Add real before/after and portfolio photos.
+- Decide whether to add any more academy price-sheet services (wax, perms, silk wrap, braids,
+  roller set) beyond the ones already on the site — only what Emma explicitly asked for is in
+  there so far.
+- Redken product quiz (Emma's idea, not yet built) — need the product lines/categories the
+  academy sells, roughly what questions it should ask, and whether it's a second quiz or a
+  branch of the existing hair quiz before this can be scaffolded.
 - Wire reviews to a real backend (Supabase/Airtable) with an approval step — currently a
   localStorage placeholder, same as the design prototype.
 - Wire an online scheduler (Square/Acuity/GlowUp) into the dashed slot in Booking, or keep the

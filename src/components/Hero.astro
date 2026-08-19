@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import emmaChair from '../assets/emma-chair.jpg';
-import { flatRate } from '../data/services';
+import { startingPrice } from '../data/services';
 ---
 
 <section data-nav="hero" class="hero">
@@ -24,12 +24,12 @@ import { flatRate } from '../data/services';
       </div>
       <div class="hero-stats">
         <div>
-          <div class="stat-value">{flatRate}</div>
-          <div class="stat-label">Flat academy rate</div>
+          <div class="stat-value">{startingPrice}</div>
+          <div class="stat-label">Haircuts start at</div>
         </div>
         <div>
           <div class="stat-value" data-countdown="days">—</div>
-          <div class="stat-label">Days to licensing</div>
+          <div class="stat-label">Days to graduation</div>
         </div>
         <div>
           <div class="stat-value">Whitehouse</div>

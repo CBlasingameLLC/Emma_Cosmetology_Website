@@ -9,8 +9,7 @@ type AnalyticsEvent =
   | 'booking_email_click'
   | 'call_direct'
   | 'call_academy'
-  | 'model_cta_click'
-  | 'tip_click'
+  | 'support_click'
   | 'vcard_download'
   | 'pwa_install'
   | 'theme_toggle';

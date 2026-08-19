@@ -1,9 +1,9 @@
-// Ticks the licensing countdown every second. Drives both the hero "days to
-// licensing" stat and the dedicated countdown section from one shared timer,
+// Ticks the graduation countdown every second. Drives both the hero "days to
+// graduation" stat and the dedicated countdown section from one shared timer,
 // matching the design prototype's single `now` tick.
-export {};
+import { contact } from '../data/contact';
 
-const TARGET = Date.parse('2027-03-01T09:00:00');
+const TARGET = Date.parse(contact.gradTarget);
 
 function pad(n: number): string {
   return n < 10 ? '0' + n : String(n);
