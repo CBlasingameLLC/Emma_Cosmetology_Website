@@ -1,0 +1,110 @@
+---
+import '../styles/global.css';
+import { getImage } from 'astro:assets';
+import { contact } from '../data/contact';
+import emmaChair from '../assets/emma-chair.jpg';
+
+const ogImage = await getImage({ src: emmaChair, width: 1200, height: 1500, format: 'jpg' });
+const ogImageUrl = new URL(ogImage.src, Astro.site ?? 'https://blasingamebeauty.com').toString();
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const {
+  title = 'Blasingame Beauty — Hair by Emma',
+  description = 'Book hair appointments with Emma Blasingame, cosmetology student at The Salon Professional Academy in Whitehouse, Texas.',
+} = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      name: contact.name,
+      jobTitle: 'Cosmetology Student',
+      worksFor: { '@type': 'LocalBusiness', name: contact.academy },
+      sameAs: [contact.instagram, contact.tiktok],
+    },
+    {
+      '@type': 'LocalBusiness',
+      name: 'Blasingame Beauty',
+      image: ogImageUrl,
+      telephone: contact.phoneDirect,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Whitehouse',
+        addressRegion: 'TX',
+        addressCountry: 'US',
+      },
+      sameAs: [contact.instagram, contact.tiktok],
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#fdf7f9" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Blasingame" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="icon" href="/assets/icon-192.png" />
+
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content={ogImageUrl} />
+
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <script is:inline>
+    (function () {
+      try {
+        var stored = localStorage.getItem('bb-theme');
+        if (stored === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        else if (stored === 'light') document.documentElement.setAttribute('data-theme', 'light');
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <slot />
+
+  <script>
+    if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+
+    navigator.serviceWorker?.addEventListener('controllerchange', () => {
+      const pill = document.createElement('div');
+      pill.textContent = 'New version — refresh';
+      pill.setAttribute('role', 'button');
+      pill.style.cssText =
+        'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:200;' +
+        'padding:12px 22px;border-radius:999px;background:var(--pink);color:var(--onpink);' +
+        'font-size:13.5px;letter-spacing:.04em;cursor:pointer;box-shadow:0 12px 32px -14px var(--glow);';
+      pill.addEventListener('click', () => location.reload());
+      document.body.appendChild(pill);
+    });
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      (window as any).__bbInstall = e;
+      window.dispatchEvent(new Event('bb-installable'));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#top" class="brand">
+      <span class="brand-name">Blasingame</span>
+      <span class="brand-sub">Beauty</span>
+    </a>
+    <nav class="nav">
+      <a data-navlink="services" href="#services" class="nav-link">Services</a>
+      <a data-navlink="quiz" href="#quiz" class="nav-link">Hair Quiz</a>
+      <a data-navlink="work" href="#work" class="nav-link">Work</a>
+      <a data-navlink="about" href="#about" class="nav-link">About</a>
+      <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch theme">
+        <span id="theme-knob" class="theme-knob"></span>
+      </button>
+      <a href="#book" class="book-pill">Book</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  import '../scripts/chrome';
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    background: color-mix(in oklab, var(--bg) 82%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 0;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    color: var(--ink);
+  }
+  .brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 23px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .brand-sub {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--pink-2);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: clamp(10px, 2vw, 30px);
+    row-gap: 10px;
+  }
+  .nav-link {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .theme-toggle {
+    position: relative;
+    width: 52px;
+    height: 28px;
+    flex: none;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    cursor: pointer;
+    padding: 0;
+  }
+  .theme-knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--pink);
+    box-shadow: 0 0 12px var(--glow);
+    transform: translateX(var(--knob, 0px));
+    transition: transform 0.38s cubic-bezier(0.5, 1.6, 0.4, 1);
+  }
+  .book-pill {
+    padding: 11px 20px;
+    border-radius: 999px;
+    background: var(--pink);
+    color: var(--onpink);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: 0 8px 24px -10px var(--glow);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .book-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px -10px var(--glow);
+    color: var(--onpink);
+  }
+</style>

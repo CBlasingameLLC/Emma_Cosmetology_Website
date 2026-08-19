@@ -1,0 +1,59 @@
+---
+const items = [
+  'The Salon Professional Academy',
+  'Supervised by licensed instructors',
+  'Cuts · Color · Blowouts · Updos',
+  'Whitehouse, Texas',
+  'Student stylist rates',
+];
+---
+
+<div class="marquee-band">
+  <div class="marquee-track">
+    <div class="marquee-group">
+      {items.map((item) => (
+        <>
+          <span>{item}</span>
+          <span class="sep">✦</span>
+        </>
+      ))}
+    </div>
+    <div class="marquee-group" aria-hidden="true">
+      {items.map((item) => (
+        <>
+          <span>{item}</span>
+          <span class="sep">✦</span>
+        </>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .marquee-band {
+    border-block: 1px solid var(--line);
+    background: var(--bg-2);
+    padding: 15px 0;
+    overflow: hidden;
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 0;
+    animation: marquee 34s linear infinite;
+  }
+  .marquee-group {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+    padding-right: 34px;
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    white-space: nowrap;
+  }
+  .sep {
+    color: var(--pink);
+  }
+</style>

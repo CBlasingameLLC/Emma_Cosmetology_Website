@@ -1,0 +1,21 @@
+<div class="progress-track" aria-hidden="true">
+  <div id="scroll-progress" class="progress-fill"></div>
+</div>
+
+<style>
+  .progress-track {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 120;
+    pointer-events: none;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold), var(--pink));
+    box-shadow: 0 0 12px var(--glow);
+  }
+</style>

@@ -1,0 +1,230 @@
+---
+import { contact } from '../data/contact';
+import { qrSvg } from '../lib/qr';
+
+const cardUrl = new URL('/card', Astro.site ?? 'https://blasingamebeauty.com').toString();
+const qr = await qrSvg(cardUrl);
+---
+
+<section id="card" data-nav="card" class="section">
+  <div class="container card-grid">
+    <div>
+      <div class="eyebrow">Share me</div>
+      <h2 class="section-title">Digital business card</h2>
+      <p class="card-intro">
+        One tap saves Emma to your contacts. One link sends her to a friend. Print the QR on a
+        card for the salon front desk and it points here.
+      </p>
+      <div class="card-actions">
+        <button type="button" id="save-contact-btn" class="btn-primary">Save to contacts</button>
+        <button type="button" id="share-card-btn" class="btn-ghost-outline">
+          <span id="share-card-label">Share this page</span>
+        </button>
+        <button type="button" id="install-app-btn" class="btn-install" hidden>Install the app</button>
+      </div>
+      <div class="home-screen-note">
+        <div class="eyebrow eyebrow-tight">Add it to your home screen</div>
+        <p class="home-screen-body">
+          This site installs like an app — full screen, its own icon, and it still opens when you
+          have no signal. <strong>iPhone:</strong> Share → Add to Home Screen.
+          <strong>Android:</strong> menu → Install app.
+        </p>
+      </div>
+    </div>
+
+    <div data-tilt data-spot class="card-visual">
+      <div aria-hidden="true" class="card-glow"></div>
+      <div class="card-inner">
+        <div>
+          <div class="card-name">{contact.name}</div>
+          <div class="card-role">Cosmetology student · Blasingame Beauty</div>
+          <div class="card-details">
+            <span>{contact.phoneDirect}</span>
+            <span>{contact.academy}</span>
+            <span>{contact.city}</span>
+          </div>
+          <div class="card-social">
+            <a href={contact.instagram} target="_blank" rel="noopener">Instagram</a>
+            <a href={contact.tiktok} target="_blank" rel="noopener">TikTok</a>
+          </div>
+        </div>
+        <div class="card-qr" set:html={qr} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/business-card';
+</script>
+
+<style>
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(30px, 4vw, 60px);
+    align-items: center;
+  }
+  .card-intro {
+    margin: 0 0 26px;
+    color: var(--ink-2);
+    font-size: 16px;
+    line-height: 1.72;
+    max-width: 46ch;
+    text-wrap: pretty;
+  }
+  .card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .btn-primary {
+    min-height: 54px;
+    padding: 16px 28px;
+    border: none;
+    border-radius: 999px;
+    background: var(--pink);
+    color: var(--onpink);
+    font-size: 14.5px;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    box-shadow: 0 12px 32px -14px var(--glow);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 46px -16px var(--glow);
+  }
+  .btn-ghost-outline {
+    min-height: 54px;
+    padding: 16px 26px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    font-size: 14.5px;
+    cursor: pointer;
+    transition: border-color 0.25s, color 0.25s, transform 0.25s;
+  }
+  .btn-ghost-outline:hover {
+    border-color: var(--pink);
+    color: var(--pink-2);
+    transform: translateY(-3px);
+  }
+  .btn-install {
+    min-height: 54px;
+    padding: 16px 26px;
+    border: 1px solid var(--pink);
+    border-radius: 999px;
+    background: var(--pink-soft);
+    color: var(--pink-2);
+    font-size: 14.5px;
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .btn-install:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 38px -18px var(--glow);
+  }
+  .home-screen-note {
+    margin-top: 26px;
+    padding: 22px 24px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--bg-2);
+  }
+  .eyebrow-tight {
+    margin-bottom: 10px;
+  }
+  .home-screen-body {
+    margin: 0;
+    font-size: 14.5px;
+    color: var(--ink-2);
+    line-height: 1.65;
+  }
+  .home-screen-body strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .card-visual {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+    padding: clamp(26px, 3vw, 38px);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 0%), var(--pink-soft), transparent 58%), var(--surface);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .card-glow {
+    position: absolute;
+    top: -70px;
+    right: -70px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--glow), transparent 70%);
+    pointer-events: none;
+  }
+  .card-inner {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 3.6vw, 40px);
+    line-height: 1.05;
+  }
+  .card-role {
+    font-size: 11.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pink-2);
+    margin-top: 8px;
+  }
+  .card-details {
+    display: grid;
+    gap: 7px;
+    margin-top: 20px;
+    font-size: 14.5px;
+    color: var(--ink-2);
+  }
+  .card-social {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .card-social a {
+    padding: 9px 16px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 12.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .card-social a:hover {
+    border-color: var(--pink);
+    color: var(--pink-2);
+  }
+  .card-qr {
+    width: 132px;
+    height: 132px;
+    flex: none;
+    padding: 14px;
+    border-radius: 14px;
+    background: var(--bg-2);
+    color: var(--ink);
+  }
+  .card-qr :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+</style>

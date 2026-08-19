@@ -1,0 +1,211 @@
+---
+import { contact } from '../data/contact';
+
+const comingSoon = ['color work', 'blowout', 'haircut', 'updo'];
+---
+
+<section id="work" data-nav="work" class="section">
+  <div class="container">
+    <div class="head-row">
+      <div>
+        <div class="eyebrow">Portfolio</div>
+        <h2 class="section-title">Before &amp; after</h2>
+      </div>
+      <p class="head-note">
+        My portfolio is just getting started — drag the handle to see how transformations will
+        show up here.
+      </p>
+    </div>
+
+    <div data-ba-root class="ba-root">
+      <div class="ba-panel ba-after">
+        <div class="ba-caption ba-caption-right">
+          <div class="ba-mono">[ after photo ]</div>
+          <div class="ba-word">After</div>
+        </div>
+      </div>
+      <div class="ba-panel ba-before">
+        <div class="ba-caption ba-caption-left">
+          <div class="ba-mono">[ before photo ]</div>
+          <div class="ba-word">Before</div>
+        </div>
+      </div>
+      <div class="ba-divider"></div>
+      <div
+        data-ba-handle
+        role="slider"
+        tabindex="0"
+        aria-label="Drag to compare before and after"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="55"
+        class="ba-handle"
+      >
+        ↔
+      </div>
+      <div class="ba-hint">Drag · or use arrow keys</div>
+    </div>
+
+    <div class="coming-soon-grid">
+      {comingSoon.map((label) => (
+        <div class="coming-soon-slot">
+          <div>
+            <div class="ba-mono">[ {label} ]</div>
+            <div class="coming-soon-label">Coming soon</div>
+          </div>
+        </div>
+      ))}
+    </div>
+    <p class="footnote">
+      Follow along on <a href={contact.instagram} target="_blank" rel="noopener">Instagram</a> and{' '}
+      <a href={contact.tiktok} target="_blank" rel="noopener">TikTok</a> — that's where the newest
+      work lands first.
+    </p>
+  </div>
+</section>
+
+<script>
+  import '../scripts/before-after';
+</script>
+
+<style>
+  .head-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: clamp(30px, 4vw, 48px);
+  }
+  .head-note {
+    max-width: 36ch;
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .ba-root {
+    position: relative;
+    user-select: none;
+    touch-action: pan-y;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    aspect-ratio: 16 / 9;
+    min-height: 300px;
+    background: var(--surface);
+  }
+  .ba-panel {
+    position: absolute;
+    inset: 0;
+    display: grid;
+  }
+  .ba-after {
+    place-items: center end;
+    background: repeating-linear-gradient(45deg, var(--surface-2) 0 12px, var(--surface) 12px 24px);
+  }
+  .ba-before {
+    place-items: center start;
+    clip-path: inset(0 calc(100% - var(--ba, 55%)) 0 0);
+    background: repeating-linear-gradient(45deg, var(--pink-soft) 0 12px, var(--surface) 12px 24px);
+  }
+  .ba-caption {
+    padding: 20px clamp(22px, 4vw, 44px);
+    pointer-events: none;
+  }
+  .ba-caption-right {
+    text-align: right;
+  }
+  .ba-caption-left {
+    text-align: left;
+  }
+  .ba-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--ink-3);
+  }
+  .ba-word {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 3vw, 34px);
+    margin-top: 8px;
+  }
+  .ba-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--ba, 55%);
+    width: 2px;
+    background: var(--pink);
+    box-shadow: 0 0 18px var(--glow);
+    pointer-events: none;
+  }
+  .ba-handle {
+    position: absolute;
+    top: 50%;
+    left: var(--ba, 55%);
+    width: 52px;
+    height: 52px;
+    margin: -26px 0 0 -26px;
+    border-radius: 50%;
+    background: var(--pink);
+    color: var(--onpink);
+    display: grid;
+    place-items: center;
+    cursor: ew-resize;
+    box-shadow: 0 8px 26px -8px var(--glow), 0 0 0 6px color-mix(in oklab, var(--pink) 18%, transparent);
+    font-size: 15px;
+    letter-spacing: -0.06em;
+    animation: pulseGlow 4s ease-in-out infinite;
+  }
+  .ba-hint {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 7px 15px;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--surface) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--line);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    white-space: nowrap;
+  }
+  .coming-soon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .coming-soon-slot {
+    aspect-ratio: 4 / 5;
+    border: 1px dashed var(--line);
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 16px;
+    background: repeating-linear-gradient(135deg, var(--surface-2) 0 10px, var(--surface) 10px 20px);
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .coming-soon-slot:hover {
+    border-color: var(--pink);
+    transform: translateY(-4px);
+  }
+  .coming-soon-label {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-top: 8px;
+  }
+  .footnote {
+    margin: 18px 0 0;
+    font-size: 13.5px;
+    color: var(--ink-3);
+  }
+</style>

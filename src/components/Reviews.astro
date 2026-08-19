@@ -1,0 +1,234 @@
+<section id="reviews" data-nav="reviews" class="section">
+  <div class="container">
+    <div class="reviews-head">
+      <div class="eyebrow">Kind words</div>
+      <h2 class="section-title">From my chair</h2>
+    </div>
+    <div class="reviews-grid">
+      <div>
+        <div id="reviews-list" class="reviews-list" hidden></div>
+        <div id="reviews-empty" class="reviews-empty">
+          <div class="empty-medallion">✦</div>
+          <h3 class="empty-title">The first review is still open</h3>
+          <p class="empty-body">
+            I'm brand new behind the chair. If you've sat with me, I'd love for you to be the
+            first to say how it went.
+          </p>
+        </div>
+      </div>
+      <div class="review-form-card">
+        <h3 class="form-title">Leave a review</h3>
+        <p class="form-sub">Takes ten seconds and means the world.</p>
+        <form id="review-form">
+          <label class="field-label" for="rv-name">Your name</label>
+          <input id="rv-name" type="text" placeholder="First name" class="field-input" />
+
+          <label class="field-label">Stars</label>
+          <div class="star-row">
+            {[1, 2, 3, 4, 5].map((n) => (
+              <button
+                type="button"
+                data-star={n}
+                aria-label={`${n} star${n > 1 ? 's' : ''}`}
+                class="star-btn"
+              >
+                ★
+              </button>
+            ))}
+          </div>
+
+          <label class="field-label" for="rv-text">How was it?</label>
+          <textarea
+            id="rv-text"
+            rows="4"
+            placeholder="She listened to exactly what I wanted…"
+            class="field-textarea"
+          ></textarea>
+
+          <button type="submit" id="rv-submit" class="btn-submit">Post my review</button>
+          <p class="form-note">
+            Saved on this device for now — the live site will send it to Emma for approval before
+            it shows up publicly.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/reviews';
+</script>
+
+<style>
+  .reviews-head {
+    text-align: center;
+    margin-bottom: clamp(30px, 4vw, 48px);
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(20px, 3vw, 34px);
+    align-items: start;
+  }
+  .reviews-list {
+    display: grid;
+    gap: 14px;
+  }
+  :global(.review-card) {
+    margin: 0;
+    padding: 24px 26px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 0%), var(--pink-soft), transparent 60%), var(--surface);
+    box-shadow: var(--shadow);
+  }
+  :global(.review-stars) {
+    color: var(--pink);
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    margin-bottom: 12px;
+  }
+  :global(.review-quote) {
+    margin: 0 0 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.45;
+  }
+  :global(.review-name) {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .reviews-empty {
+    padding: clamp(30px, 4vw, 48px);
+    border: 1px dashed var(--line);
+    border-radius: 20px;
+    background: var(--bg-2);
+    text-align: center;
+  }
+  .empty-medallion {
+    width: 74px;
+    height: 74px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--pink);
+    font-size: 22px;
+    letter-spacing: -0.05em;
+    animation: pulseGlow 4s ease-in-out infinite;
+  }
+  .empty-title {
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0 0 12px;
+  }
+  .empty-body {
+    margin: 0 auto;
+    max-width: 38ch;
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .review-form-card {
+    padding: clamp(24px, 3vw, 34px);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .form-title {
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0 0 8px;
+  }
+  .form-sub {
+    margin: 0 0 22px;
+    font-size: 14px;
+    color: var(--ink-3);
+    line-height: 1.6;
+  }
+  .field-label {
+    display: block;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 8px;
+  }
+  .field-input,
+  .field-textarea {
+    width: 100%;
+    margin-bottom: 18px;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--bg-2);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field-input {
+    min-height: 50px;
+  }
+  .field-textarea {
+    resize: vertical;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .field-input:focus,
+  .field-textarea:focus {
+    border-color: var(--pink);
+  }
+  .star-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .star-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    color: var(--pink);
+    font-size: 17px;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    opacity: var(--st-op, 1);
+  }
+  .star-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--pink);
+  }
+  .btn-submit {
+    width: 100%;
+    min-height: 52px;
+    padding: 15px 24px;
+    border: none;
+    border-radius: 999px;
+    background: var(--pink);
+    color: var(--onpink);
+    font-size: 14.5px;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    box-shadow: 0 12px 30px -14px var(--glow);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px -16px var(--glow);
+  }
+  .form-note {
+    margin: 14px 0 0;
+    font-size: 12.5px;
+    color: var(--ink-3);
+    line-height: 1.55;
+  }
+</style>

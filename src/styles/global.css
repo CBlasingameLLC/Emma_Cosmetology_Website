@@ -1,0 +1,165 @@
+@import '@fontsource/cormorant-garamond/300.css';
+@import '@fontsource/cormorant-garamond/400.css';
+@import '@fontsource/cormorant-garamond/500.css';
+@import '@fontsource/cormorant-garamond/300-italic.css';
+@import '@fontsource/cormorant-garamond/400-italic.css';
+@import '@fontsource/jost/300.css';
+@import '@fontsource/jost/400.css';
+@import '@fontsource/jost/500.css';
+@import '@fontsource/jost/600.css';
+
+:root {
+  --hue: 350;
+  color-scheme: light;
+  --bg: oklch(99.2% .006 var(--hue));
+  --bg-2: oklch(97.4% .014 var(--hue));
+  --surface: oklch(99.8% .004 var(--hue));
+  --surface-2: oklch(96.4% .02 var(--hue));
+  --ink: oklch(23% .028 var(--hue));
+  --ink-2: oklch(46% .022 var(--hue));
+  --ink-3: oklch(62% .022 var(--hue));
+  --line: oklch(91% .024 var(--hue));
+  --pink: oklch(66% .17 var(--hue));
+  --pink-2: oklch(55% .17 var(--hue));
+  --pink-soft: oklch(94% .036 var(--hue));
+  --gold: oklch(70% .085 85);
+  --glow: oklch(66% .17 var(--hue) / .3);
+  --shadow: 0 18px 50px -24px oklch(45% .12 var(--hue) / .38);
+  --onpink: oklch(99% .01 var(--hue));
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: oklch(13.5% .014 var(--hue));
+  --bg-2: oklch(16.5% .02 var(--hue));
+  --surface: oklch(18.5% .024 var(--hue));
+  --surface-2: oklch(23% .032 var(--hue));
+  --ink: oklch(97% .012 var(--hue));
+  --ink-2: oklch(75% .024 var(--hue));
+  --ink-3: oklch(60% .03 var(--hue));
+  --line: oklch(30% .038 var(--hue));
+  --pink: oklch(78% .245 var(--hue));
+  --pink-2: oklch(86% .19 var(--hue));
+  --pink-soft: oklch(26% .075 var(--hue));
+  --gold: oklch(82% .09 85);
+  --glow: oklch(78% .245 var(--hue) / .5);
+  --shadow: 0 22px 64px -26px oklch(4% .04 var(--hue) / .85);
+  --onpink: oklch(14% .022 var(--hue));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-theme='dark']) {
+    color-scheme: dark;
+    --bg: oklch(13.5% .014 var(--hue));
+    --bg-2: oklch(16.5% .02 var(--hue));
+    --surface: oklch(18.5% .024 var(--hue));
+    --surface-2: oklch(23% .032 var(--hue));
+    --ink: oklch(97% .012 var(--hue));
+    --ink-2: oklch(75% .024 var(--hue));
+    --ink-3: oklch(60% .03 var(--hue));
+    --line: oklch(30% .038 var(--hue));
+    --pink: oklch(78% .245 var(--hue));
+    --pink-2: oklch(86% .19 var(--hue));
+    --pink-soft: oklch(26% .075 var(--hue));
+    --gold: oklch(82% .09 85);
+    --glow: oklch(78% .245 var(--hue) / .5);
+    --shadow: 0 22px 64px -26px oklch(4% .04 var(--hue) / .85);
+    --onpink: oklch(14% .022 var(--hue));
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 92px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Jost', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background .5s ease, color .5s ease;
+}
+img { display: block; max-width: 100%; }
+button { font-family: inherit; }
+input, textarea, select { font-family: inherit; font-size: 15px; }
+a { color: var(--pink-2); text-decoration: none; transition: color .2s ease; }
+a:hover { color: var(--pink); }
+::selection { background: var(--pink); color: var(--onpink); }
+
+:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 2px;
+}
+
+.container {
+  width: min(1180px, 92vw);
+  margin-inline: auto;
+}
+.container-narrow {
+  width: min(880px, 92vw);
+  margin-inline: auto;
+}
+
+.eyebrow {
+  font-size: 11.5px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--pink-2);
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: clamp(36px, 5.4vw, 62px);
+  line-height: 1.02;
+  letter-spacing: -.015em;
+  margin: 0;
+}
+
+.section-title-sm {
+  font-size: clamp(30px, 4.4vw, 50px);
+  line-height: 1.05;
+  margin: 0 0 10px;
+}
+
+.section {
+  padding: clamp(76px, 9vw, 132px) 0;
+}
+.section-tight {
+  padding: clamp(52px, 7vw, 96px) 0;
+}
+.section-band {
+  background: var(--bg-2);
+  border-block: 1px solid var(--line);
+}
+
+h1, h2, h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+}
+
+@keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+@keyframes riseIn { from { opacity: 0; transform: translateY(34px) scale(.985); } to { opacity: 1; transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 0 0 var(--glow); } 50% { box-shadow: 0 0 34px 6px var(--glow); } }
+@keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+@keyframes pop { from { opacity: 0; transform: scale(.94) translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes sheen { from { transform: translateX(-120%) skewX(-18deg); } to { transform: translateX(320%) skewX(-18deg); } }
+
+.reveal {
+  animation: rise .9s cubic-bezier(.2, .7, .2, 1) both;
+  animation-timeline: view();
+  animation-range: entry 4% cover 26%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

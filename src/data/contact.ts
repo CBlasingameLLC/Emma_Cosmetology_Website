@@ -1,0 +1,16 @@
+export const contact = {
+  name: 'Emma Blasingame',
+  phoneDirect: '903-730-1234',
+  phoneDirectHref: 'tel:+19037301234',
+  phoneDirectRaw: '+19037301234',
+  phoneAcademy: '903-871-7575',
+  phoneAcademyHref: 'tel:+19038717575',
+  academy: 'The Salon Professional Academy',
+  city: 'Whitehouse, Texas',
+  instagram: 'https://www.instagram.com/blasingame_beauty?igsh=bHY5Nmt5NXg4aHZz&utm_source=qr',
+  instagramHandle: '@blasingame_beauty',
+  tiktok: 'https://www.tiktok.com/@blasingame_beauty?_r=1&_t=ZT-98xesJyqrGQ',
+  tiktokHandle: '@blasingame_beauty',
+  gradLabel: 'March 2027',
+  gradTarget: '2027-03-01T09:00:00',
+};
