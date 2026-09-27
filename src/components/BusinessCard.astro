@@ -219,12 +219,22 @@ const qr = await qrSvg(cardUrl);
     flex: none;
     padding: 14px;
     border-radius: 14px;
-    background: var(--bg-2);
-    color: var(--ink);
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid rgba(0, 0, 0, 0.08);
   }
   .card-qr :global(svg) {
     width: 100%;
     height: 100%;
     display: block;
+  }
+
+  @media (max-width: 640px) {
+    .card-visual {
+      padding: 20px;
+    }
+    .card-inner {
+      gap: 20px;
+    }
   }
 </style>

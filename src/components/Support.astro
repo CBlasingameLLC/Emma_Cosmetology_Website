@@ -13,21 +13,13 @@ import { payments } from '../data/payments';
       </p>
     </div>
     <div class="support-grid">
-      {payments.map((p) =>
-        p.href ? (
-          <a href={p.href} target="_blank" rel="noopener" data-spot data-analytics="support_click" data-method={p.method} class="support-card">
-            <div class="support-method">{p.method}</div>
-            <div class="support-value">{p.value}</div>
-            <div class="support-action">Opens {p.method} →</div>
-          </a>
-        ) : (
-          <button type="button" id="zelle-btn" data-spot class="support-card support-card-btn">
-            <div class="support-method">{p.method}</div>
-            <div class="support-value">{p.value}</div>
-            <div id="zelle-label" class="support-action">Tap to copy · send in your bank app</div>
-          </button>
-        ),
-      )}
+      {payments.map((p) => (
+        <a href={p.href} target="_blank" rel="noopener" data-spot data-analytics="support_click" data-method={p.method} class="support-card">
+          <div class="support-method">{p.method}</div>
+          <div class="support-value">{p.value}</div>
+          <div class="support-action">Opens {p.method} →</div>
+        </a>
+      ))}
     </div>
     <p class="support-footnote">Cash in the chair works just as well.</p>
   </div>
@@ -38,23 +30,6 @@ import { payments } from '../data/payments';
 
   document.querySelectorAll<HTMLAnchorElement>('[data-analytics="support_click"]').forEach((el) => {
     el.addEventListener('click', () => track('support_click', { method: el.dataset.method || '' }));
-  });
-
-  const zelleBtn = document.getElementById('zelle-btn');
-  const zelleLabel = document.getElementById('zelle-label');
-  zelleBtn?.addEventListener('click', async () => {
-    track('support_click', { method: 'Zelle' });
-    try {
-      await navigator.clipboard.writeText('903-730-1234');
-    } catch {
-      // clipboard unavailable; label still flips as feedback
-    }
-    if (zelleLabel) {
-      zelleLabel.textContent = 'Number copied ♡';
-      setTimeout(() => {
-        zelleLabel.textContent = 'Tap to copy · send in your bank app';
-      }, 2200);
-    }
   });
 </script>
 
@@ -89,9 +64,6 @@ import { payments } from '../data/payments';
     color: var(--ink);
     transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.28s;
   }
-  .support-card-btn {
-    cursor: pointer;
-  }
   .support-card:hover {
     transform: translateY(-3px);
     border-color: var(--pink);
@@ -121,5 +93,11 @@ import { payments } from '../data/payments';
     font-size: 12.5px;
     color: var(--ink-3);
     line-height: 1.6;
+  }
+
+  @media (max-width: 640px) {
+    .support-card {
+      padding: 14px 16px;
+    }
   }
 </style>

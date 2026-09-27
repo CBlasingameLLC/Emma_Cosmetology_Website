@@ -56,7 +56,7 @@ export const services: Service[] = [
     category: 'Treatment',
     title: 'Deep conditioning',
     description: 'Bond-building and moisture treatments with a scalp massage. Great paired with a dusting of the ends.',
-    duration: '45–75 min',
+    duration: '10–15 min',
     price: '$20',
   },
   {

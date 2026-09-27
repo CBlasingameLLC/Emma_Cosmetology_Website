@@ -1,15 +1,10 @@
 export type PaymentMethod = {
-  method: 'Venmo' | 'Cash App' | 'Zelle';
+  method: 'Venmo' | 'Cash App';
   value: string;
-  href?: string;
+  href: string;
 };
 
-/**
- * Venmo and Cash App handles are placeholders from the design handoff —
- * confirm both with Emma before launch.
- */
 export const payments: PaymentMethod[] = [
-  { method: 'Venmo', value: '@Emma-Blasingame', href: 'https://venmo.com/u/Emma-Blasingame' },
-  { method: 'Cash App', value: '$emmablasingame', href: 'https://cash.app/$emmablasingame' },
-  { method: 'Zelle', value: '903-730-1234' },
+  { method: 'Venmo', value: '@Emma-Blasingame-2', href: 'https://venmo.com/u/Emma-Blasingame-2' },
+  { method: 'Cash App', value: '$EmmaBlasingame0', href: 'https://cash.app/$EmmaBlasingame0' },
 ];

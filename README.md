@@ -37,22 +37,23 @@ No markup editing needed for day-to-day changes — everything content-shaped li
 - **`quiz.ts`** — the five hair-quiz questions/options and the recommendation rules. The rules
   are deliberately honest (e.g. box dye always gets a consultation, never a promised one-visit
   fix) — keep that intent if you edit the copy.
-- **`payments.ts`** — Venmo/Cash App/Zelle handles shown in the low-key Support section.
-  **The Venmo and Cash App handles are placeholders — confirm both with Emma before launch.**
+- **`payments.ts`** — Venmo/Cash App handles shown in the low-key Support section (real handles,
+  confirmed by Emma; no Zelle for now — she doesn't have one).
 - **`reviews.ts`** — approved reviews shown on the site. Leave empty until real reviews are
   approved; the empty state is intentional (see design handoff).
 - **`contact.ts`** — phone numbers, academy address, social links, and `gradLabel`/`gradTarget`
   (the graduation date — not a licensing date, since Emma won't know that until after she
   graduates). The live countdown reads `gradTarget` directly, so only edit it in one place.
-- **`portfolio.ts`** — before/after image pairs; empty renders the placeholder slider.
+- **`portfolio.ts`** — before/after image pairs (imported photos, optimized via `astro:assets`);
+  empty renders the placeholder slider. Currently has one real color-transformation pair.
 
 ## Open items before launch
 
 Carried over from the design handoff — see [`design/README.md`](./design/README.md) for full
 detail:
 
-- Confirm real Venmo/Cash App handles.
-- Add real before/after and portfolio photos.
+- Add more before/after and portfolio photos as Emma gets them — the "coming soon" grid was
+  removed for now rather than sit empty; bring it back once there's a second real example.
 - Decide whether to add any more academy price-sheet services (wax, perms, silk wrap, braids,
   roller set) beyond the ones already on the site — only what Emma explicitly asked for is in
   there so far.
@@ -64,7 +65,8 @@ detail:
 - Wire an online scheduler (Square/Acuity/GlowUp) into the dashed slot in Booking, or keep the
   `sms:`/`mailto:` flow as-is.
 - Pick a domain and update `site` in `astro.config.mjs`.
-- Replace the placeholder PWA icons with a real monogram/logo when Emma has one.
+- PWA icons are a bespoke scissors mark (see `scripts/generate-icons.mjs` — edit the SVG there
+  and run `npm run icons` to regenerate). Swap for a real monogram/logo if Emma gets one made.
 - Wire a real privacy-friendly analytics provider (Plausible/Umami) — `src/scripts/analytics.ts`
   is a no-op stub until a domain + script tag are added.
 

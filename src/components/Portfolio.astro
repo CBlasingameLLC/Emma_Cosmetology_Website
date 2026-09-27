@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import { contact } from '../data/contact';
+import { beforeAfterPairs } from '../data/portfolio';
 
-const comingSoon = ['color work', 'blowout', 'haircut', 'updo'];
+const pair = beforeAfterPairs[0];
 ---
 
 <section id="work" data-nav="work" class="section">
@@ -12,24 +14,38 @@ const comingSoon = ['color work', 'blowout', 'haircut', 'updo'];
         <h2 class="section-title">Before &amp; after</h2>
       </div>
       <p class="head-note">
-        My portfolio is just getting started — drag the handle to see how transformations will
-        show up here.
+        {pair
+          ? 'Drag the handle to see the transformation.'
+          : 'My portfolio is just getting started — check back soon for real transformations.'}
       </p>
     </div>
 
     <div data-ba-root class="ba-root reveal">
-      <div class="ba-panel ba-after">
-        <div class="ba-caption ba-caption-right">
-          <div class="ba-mono">[ after photo ]</div>
-          <div class="ba-word">After</div>
-        </div>
-      </div>
-      <div class="ba-panel ba-before">
-        <div class="ba-caption ba-caption-left">
-          <div class="ba-mono">[ before photo ]</div>
-          <div class="ba-word">Before</div>
-        </div>
-      </div>
+      {pair ? (
+        <Fragment>
+          <div class="ba-panel ba-after">
+            <Image src={pair.after} alt={`${pair.alt} — after`} class="ba-photo" width={800} height={1000} format="webp" />
+          </div>
+          <div class="ba-panel ba-before">
+            <Image src={pair.before} alt={`${pair.alt} — before`} class="ba-photo" width={800} height={1000} format="webp" />
+          </div>
+        </Fragment>
+      ) : (
+        <Fragment>
+          <div class="ba-panel ba-after">
+            <div class="ba-caption ba-caption-right">
+              <div class="ba-mono">[ after photo ]</div>
+              <div class="ba-word">After</div>
+            </div>
+          </div>
+          <div class="ba-panel ba-before">
+            <div class="ba-caption ba-caption-left">
+              <div class="ba-mono">[ before photo ]</div>
+              <div class="ba-word">Before</div>
+            </div>
+          </div>
+        </Fragment>
+      )}
       <div class="ba-divider"></div>
       <div
         data-ba-handle
@@ -46,16 +62,6 @@ const comingSoon = ['color work', 'blowout', 'haircut', 'updo'];
       <div class="ba-hint">Drag · or use arrow keys</div>
     </div>
 
-    <div class="coming-soon-grid">
-      {comingSoon.map((label) => (
-        <div class="coming-soon-slot">
-          <div>
-            <div class="ba-mono">[ {label} ]</div>
-            <div class="coming-soon-label">Coming soon</div>
-          </div>
-        </div>
-      ))}
-    </div>
     <p class="footnote">
       Follow along on <a href={contact.instagram} target="_blank" rel="noopener">Instagram</a> and{' '}
       <a href={contact.tiktok} target="_blank" rel="noopener">TikTok</a> — that's where the newest
@@ -92,14 +98,21 @@ const comingSoon = ['color work', 'blowout', 'haircut', 'updo'];
     border-radius: 24px;
     overflow: hidden;
     box-shadow: var(--shadow);
-    aspect-ratio: 16 / 9;
-    min-height: 300px;
+    aspect-ratio: 4 / 5;
+    max-width: 520px;
+    margin-inline: auto;
     background: var(--surface);
   }
   .ba-panel {
     position: absolute;
     inset: 0;
     display: grid;
+  }
+  .ba-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 18%;
   }
   .ba-after {
     place-items: center end;
@@ -175,37 +188,18 @@ const comingSoon = ['color work', 'blowout', 'haircut', 'updo'];
     color: var(--ink-3);
     white-space: nowrap;
   }
-  .coming-soon-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 16px;
-    margin-top: 16px;
-  }
-  .coming-soon-slot {
-    aspect-ratio: 4 / 5;
-    border: 1px dashed var(--line);
-    border-radius: 18px;
-    display: grid;
-    place-items: center;
-    text-align: center;
-    padding: 16px;
-    background: repeating-linear-gradient(135deg, var(--surface-2) 0 10px, var(--surface) 10px 20px);
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .coming-soon-slot:hover {
-    border-color: var(--pink);
-    transform: translateY(-4px);
-  }
-  .coming-soon-label {
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin-top: 8px;
-  }
   .footnote {
     margin: 18px 0 0;
     font-size: 13.5px;
     color: var(--ink-3);
+  }
+
+  @media (max-width: 640px) {
+    .ba-root {
+      max-width: 100%;
+    }
+    .ba-caption {
+      padding: 14px 20px;
+    }
   }
 </style>
